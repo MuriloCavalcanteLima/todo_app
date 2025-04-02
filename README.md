@@ -1,4 +1,4 @@
-# 📌 To-Do List API
+# 📌 To-Do List API | Ruby on Rails
 
 ### An API to manage tasks ans goals
 
