@@ -1,0 +1,4 @@
+<h1>⚠️ Tarefa Atrasada!</h1>
+<p>Olá, <%= @task.user.name || "usuário" %>,</p>
+<p>A tarefa "<strong><%= @task.title %></strong>" estava prevista para <%= @task.due_date.strftime("%d/%m/%Y") %> e ainda não foi concluída.</p>
+<p>Não se esqueça de atualizá-la! 😊</p>

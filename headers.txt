@@ -1,0 +1,36 @@
+HTTP/1.1 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 0
+x-content-type-options: nosniff
+x-permitted-cross-domain-policies: none
+referrer-policy: strict-origin-when-cross-origin
+content-type: application/json; charset=utf-8
+vary: Accept, Origin
+access-token: B4b1Onve98J_Cz5Q7tvTmA
+token-type: Bearer
+client: 5krNvtosnPb0icqWl1WsgA
+expiry: 1744776244
+uid: dev@xample.com
+authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJCNGIxT252ZTk4Sl9DejVRN3R2VG1BIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IjVrck52dG9zblBiMGljcVdsMVdzZ0EiLCJleHBpcnkiOiIxNzQ0Nzc2MjQ0IiwidWlkIjoiZGV2QHhhbXBsZS5jb20ifQ==
+etag: W/"b4221fbb5cd004581d0f3097fba1dbdb"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 8dacba87-753c-4e76-92a6-84e0f40fae1f
+x-runtime: 0.242898
+server-timing: start_processing.action_controller;dur=0.01, sql.active_record;dur=1.38, instantiation.active_record;dur=0.10, transaction.active_record;dur=50.39, process_action.action_controller;dur=240.43
+Content-Length: 155
+
+{"data":{"email":"dev@xample.com","provider":"email","uid":"dev@xample.com","id":1,"allow_password_change":false,"name":null,"nickname":null,"image":null}}
+
+// path to new token
+curl -i -X POST http://localhost:3000/auth/sign_in -d "email=dev@xample.com&password=12345678"
+
+
+// Para testar a autenticação em uma requisição autenticada, faça:
+
+bash
+Copiar
+Editar
+curl -X GET http://localhost:3000/rota_protegida \
+  -H "access-token: SEU_TOKEN_AQUI" \
+  -H "client: SEU_CLIENT_ID_AQUI" \
+  -H "uid: SEU_EMAIL_AQUI"
