@@ -1,6 +1,7 @@
 # 📌 To-Do List API | Ruby on Rails
 
-### An API to manage tasks ans goals
+### rails rest api app to manage tasks and goals with JWT authentication
+
 
 ## ✨ Structure
 
@@ -15,7 +16,7 @@
 
 ### 📦 Dependencies and versions
 
-Be sure that ypu have installed:
+Make sure that ypu have installed:
 
 - Ruby 3.2+
 - Rails 7+
