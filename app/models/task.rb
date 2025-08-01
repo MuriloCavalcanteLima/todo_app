@@ -3,4 +3,6 @@ class Task < ApplicationRecord
 
   has_many :taskgroups, dependent: :destroy
   has_many :groups, through: :taskgroups
+
+  
 end

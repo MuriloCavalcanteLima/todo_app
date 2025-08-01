@@ -12,7 +12,8 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = current_user.tasks.new(permitted_params)
+        @task = Task.new(permitted_params.merge(user: current_user))
+        
         if @task.save
             render json: @task, status: :created
         else
@@ -41,6 +42,6 @@ class TasksController < ApplicationController
     end
 
     def permitted_params
-        params.require(:task).permit(:title, :description, :due_date, :type, :completed)
+        params.require(:task).permit(:title, :description, :due_date, :completed)
     end
 end
