@@ -5,4 +5,5 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_many :tasks, dependent: :destroy
+  has_many :groups, dependent: :destroy
 end
