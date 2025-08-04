@@ -12,9 +12,21 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new(permitted_params.merge(user: current_user))
+
+        @task = current_user.tasks.build(permitted_params)
         
         if @task.save
+            if params[:task][:group_id].present?
+                group = current_user.groups.find(params[:task][:group_id])
+
+                if group.present?
+                    TaskGroup.create(task: @task, group: group)
+                else
+                    render json: { error: 'Grupo não encontrado ou não pertence ao usuário' }, status: :unprocessable_entity
+                    return
+                end
+            end
+
             render json: @task, status: :created
         else
             render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
@@ -42,6 +54,6 @@ class TasksController < ApplicationController
     end
 
     def permitted_params
-        params.require(:task).permit(:title, :description, :due_date, :completed)
+        params.require(:task).permit(:title, :description, :due_date, :completed, :status, :group_id).merge(user: current_user)
     end
 end

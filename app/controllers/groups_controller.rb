@@ -1,6 +1,6 @@
 #frozen_string_literal: true
 
-class groupsController < ApplicationController
+class GroupsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_group, only: [:show, :update, :destroy]
     
@@ -14,11 +14,11 @@ class groupsController < ApplicationController
     end
     
     def create
-        @group = current_user.groups.new(group_params)
+        @group = Group.new(group_params)
         if @group.save
-        render json: @group, status: :created
+            render json: @group, status: :created
         else
-        render json: { errors: @group.errors.full_messages }, status: :unprocessable_entity
+            render json: { errors: @group.errors.full_messages }, status: :unprocessable_entity
         end
     end
     
@@ -44,6 +44,6 @@ class groupsController < ApplicationController
     end
     
     def group_params
-        params.require(:group).permit(:name, :description)
+        params.require(:group).permit(:name, :description).merge(user: current_user)
     end
 end

@@ -1,8 +1,11 @@
 class Task < ApplicationRecord
   belongs_to :user
 
-  has_many :taskgroups, dependent: :destroy
-  has_many :groups, through: :taskgroups
+  has_many :task_groups, dependent: :destroy
+  has_many :groups, through: :task_groups
 
-  
+  validates :title, presence: true, uniqueness: { scope: :user_id }
+  validates :user_id, presence: true
+
+  #adicionar default pra status
 end
