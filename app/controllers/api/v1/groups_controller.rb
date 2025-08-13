@@ -7,7 +7,7 @@ class Api::V1::GroupsController < ApplicationController
     def index
         @groups = current_user.groups
         render json: @groups, status: :ok
-    end
+    end 
     
     def show
         render json: @group, status: :ok
@@ -31,8 +31,9 @@ class Api::V1::GroupsController < ApplicationController
     end
     
     def destroy
+        @groups = current_user.groups
         @group.destroy
-        head :no_content
+        render json: @groups, status: :ok
     end
     
     private

@@ -1,3 +1,5 @@
+#frozen_string_literal: true
+
 class Api::V1::TasksController < ApplicationController
     before_action :authenticate_user!
     before_action :set_task, only: %i[show update destroy]
@@ -12,21 +14,9 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def create
-
         @task = current_user.tasks.build(permitted_params)
-        
+
         if @task.save
-            if params[:task][:group_id].present?
-                group = current_user.groups.find(params[:task][:group_id])
-
-                if group.present?
-                    TaskGroup.create(task: @task, group: group)
-                else
-                    render json: { error: 'Grupo não encontrado ou não pertence ao usuário' }, status: :unprocessable_entity
-                    return
-                end
-            end
-
             render json: @task, status: :created
         else
             render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
