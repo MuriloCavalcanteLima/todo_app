@@ -1,6 +1,6 @@
 #frozen_string_literal: true
 
-class Api::V1::TasksController < ApplicationController
+class Api::TasksController < ApplicationController
     before_action :authenticate_user!
     before_action :set_task, only: %i[show update destroy]
 

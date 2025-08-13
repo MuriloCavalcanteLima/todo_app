@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::GroupsController, type: :request do
+RSpec.describe Api::GroupsController, type: :request do
 
     let(:auth_headers) do
         post '/auth/sign_in', params: params
@@ -17,7 +17,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
         let(:params) { { email: 'strangeman@email.com', password: 'unauthorized' } }
 
         it 'responds with unauthorized' do
-            get api_v1_groups_path, headers: auth_headers
+            get api_groups_path, headers: auth_headers
 
             expect(response).to have_http_status(:unauthorized)
         end
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
 
         describe 'GET #index' do
             it 'responds with authorized' do
-                get api_v1_groups_path, headers: auth_headers
+                get api_groups_path, headers: auth_headers
 
                 expect(response).to have_http_status(:ok)
                 
@@ -40,7 +40,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
             let(:group) { create(:group, user:) }
 
             it 'responds with authorized', :aggregate_failures do
-                get api_v1_group_path(group), headers: auth_headers
+                get api_group_path(group), headers: auth_headers
 
                 json = JSON.parse(response.body)
 
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
             let(:group_params) { { 'group': { name: 'new_group', description: 'some description' } } }
 
             it 'responds with authorized', :aggregate_failures do
-                post api_v1_groups_path, params: group_params, headers: auth_headers
+                post api_groups_path, params: group_params, headers: auth_headers
 
                 json = JSON.parse(response.body)
 
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
             let(:group_params) { { 'group': { name: 'edited_name_group' } } }
 
             it 'updates succesfully', :aggregate_failures do
-                put api_v1_group_path(group), headers: auth_headers, params: group_params
+                put api_group_path(group), headers: auth_headers, params: group_params
 
                 expect(response).to have_http_status(:ok)
                 expect(group.reload.name).to eq('edited_name_group')
@@ -87,7 +87,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
             let(:group) { create(:group, user:) }
 
             it 'deletes group' do
-                delete api_v1_group_path(group), headers: auth_headers
+                delete api_group_path(group), headers: auth_headers
 
                 expect(response).to have_http_status(:ok)
                 expect { Group.find(group.id) }.to raise_error(ActiveRecord::RecordNotFound)

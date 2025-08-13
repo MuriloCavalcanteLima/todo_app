@@ -8,18 +8,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :tasks, except: [:new, :edit]
-  resources :groups, except: [:new, :edit]
+  # resources :tasks, except: [:new, :edit]
+  # resources :groups, except: [:new, :edit]
 
   namespace :api do
-    namespace :v1 do
-      resources :tasks
-    end
+    resources :tasks
   end  
 
   namespace :api do
-    namespace :v1 do
-      resources :groups
-    end
+    resources :groups
   end  
 end
