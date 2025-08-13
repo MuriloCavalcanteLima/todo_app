@@ -6,6 +6,4 @@ class Task < ApplicationRecord
 
   validates :title, presence: true, uniqueness: { scope: :user_id }
   validates :user_id, presence: true
-
-  #adicionar default pra status
 end
