@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :group do
-        name { 'Tarefas de saúde' }
-        description { "Tarefas relacionadas a condicionamento fisico e nutrição "}
+        sequence(:name) { |n| "Tarefas de #{n}" }
+        description { "Tarefas relacionadas a #{name}"}
         user {  create(:user) }
     end
 end

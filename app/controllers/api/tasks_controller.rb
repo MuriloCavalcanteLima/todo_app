@@ -33,7 +33,7 @@ class Api::TasksController < ApplicationController
 
     def destroy
         @task.destroy
-        head :no_content
+        head :ok
     end
 
     private

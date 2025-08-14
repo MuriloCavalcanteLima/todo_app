@@ -1,6 +1,6 @@
 FactoryBot.define do
     factory :task do
-        title { 'Comer, saudavelmente' }
+        sequence(:title) { |n| "Comer, saudavelmente#{n}" }
         description { '150arroz branco, 150g feijao...' }
         status { 'pending' }
         due_date { Date.tomorrow }
